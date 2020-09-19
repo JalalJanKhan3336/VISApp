@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1032309472090",
+    "firebase_url": "https://visapp-105c3.firebaseio.com",
+    "project_id": "visapp-105c3",
+    "storage_bucket": "visapp-105c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032309472090:android:b18da0c4e9ee4342501163",
+        "android_client_info": {
+          "package_name": "com.thesoftparrot.storageapp.visapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032309472090-896lhgtjm21lifj9vu7fukde21kan36d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR48o9HZEr_b_7JNzxtpLeRqUK-mnAGCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032309472090-896lhgtjm21lifj9vu7fukde21kan36d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
