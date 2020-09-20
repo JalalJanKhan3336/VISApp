@@ -52,19 +52,19 @@
         android:hint="@string/dummy_code"
         android:maxLines="1"
         android:maxLength="6"
+        android:inputType="number"
         android:layout_marginTop="@dimen/_16sdp"
         style="@style/Small_Text_Normal_Style"
         android:textColorHint="@color/colorTextParagraph"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/colorTextHeading"/>
 
     <Button
         android:id="@+id/verify_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/verify"
-        android:background="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
-        style="@style/Small_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        style="@style/Smallest_Text_Normal_Style"
         android:layout_gravity="end"/>
 
 </LinearLayout>

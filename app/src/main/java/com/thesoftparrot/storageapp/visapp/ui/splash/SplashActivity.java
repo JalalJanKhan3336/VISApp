@@ -23,7 +23,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     protected void initRef() {
-        new Handler().postDelayed(() -> move(isLoggedIn()? MainActivity.class: AuthActivity.class), 2000);
+        new Handler().postDelayed(() -> move(isLoggedIn() ? MainActivity.class: AuthActivity.class), 2000);
     }
 
     @Override

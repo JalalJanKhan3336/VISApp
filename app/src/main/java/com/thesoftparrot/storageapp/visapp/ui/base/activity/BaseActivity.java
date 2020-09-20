@@ -31,7 +31,6 @@ public abstract class BaseActivity<VB> extends AppCompatActivity {
         mBinding = initBinding();
         setContentView(initRoot());
 
-        initNavGraph();
         initPref();
         initRef();
         click();
@@ -41,8 +40,8 @@ public abstract class BaseActivity<VB> extends AppCompatActivity {
         mPrefManager = SharedPrefStorageManager.getInstance(VisApp.getInstance().getAppContext(),getResources().getString(R.string.app_name));
     }
 
-    private void initNavGraph(){
-        mNavController = Navigation.findNavController(this, R.id.host_fragment);
+    protected void initNavGraph(int host){
+        mNavController = Navigation.findNavController(this, host);
     }
 
     protected boolean isLoggedIn(){

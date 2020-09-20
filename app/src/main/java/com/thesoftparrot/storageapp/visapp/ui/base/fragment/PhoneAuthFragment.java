@@ -1,6 +1,7 @@
 package com.thesoftparrot.storageapp.visapp.ui.base.fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -9,10 +10,14 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken;
+import com.thesoftparrot.storageapp.visapp.extras.utils.KeyUtils;
 
 import java.util.concurrent.TimeUnit;
 
 public abstract class PhoneAuthFragment<VB> extends BaseFragment<VB> {
+
+    private static final String TAG = "PhoneAuthFragment";
 
     protected abstract void onPhoneAuthSuccess(boolean isNewUser);
     protected abstract void onPhoneAuthFailed(String error);
@@ -22,27 +27,32 @@ public abstract class PhoneAuthFragment<VB> extends BaseFragment<VB> {
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mVerificationStateCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
-        public void onCodeSent(@NonNull String verificId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+        public void onCodeSent(@NonNull String verificId, @NonNull ForceResendingToken forceResendingToken) {
             super.onCodeSent(verificId, forceResendingToken);
             verificationId = verificId;
+            Log.d(TAG, "_onCodeSent_VerificationId: "+verificationId);
         }
 
         @Override
         public void onCodeAutoRetrievalTimeOut(@NonNull String code) {
             super.onCodeAutoRetrievalTimeOut(code);
-
-            if(code != null || !TextUtils.isEmpty(code))
-                verifyCode(code);
+            Log.d(TAG, "_onCodeAutoRetrievalTimeOut_SMS_Code: "+code);
+            verifyCode(code);
         }
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-            signInWithCredential(credential);
+            String code = credential.getSmsCode();
+            Log.d(TAG, "_onVerificationCompleted_SMS_Code: "+code);
+            verifyCode(code);
+            loading(true,false, KeyUtils.PHONE_VERIFICATION_MSG);
         }
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            onPhoneAuthFailed(e.getMessage());
+            String error = e.getLocalizedMessage();
+            Log.e(TAG, "_onVerificationFailed_Error: "+error);
+            onPhoneAuthFailed(error);
         }
     };
 
@@ -57,6 +67,7 @@ public abstract class PhoneAuthFragment<VB> extends BaseFragment<VB> {
                 .signInWithCredential(credential)
                 .addOnSuccessListener(authResult -> onPhoneAuthSuccess(authResult.getAdditionalUserInfo().isNewUser()))
                 .addOnFailureListener(e -> onPhoneAuthFailed(e.getMessage()));
+
     }
 
     public PhoneAuthFragment() {}

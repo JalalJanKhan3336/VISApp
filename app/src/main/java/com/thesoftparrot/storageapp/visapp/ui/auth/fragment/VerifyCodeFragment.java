@@ -1,23 +1,34 @@
 package com.thesoftparrot.storageapp.visapp.ui.auth.fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.pakistan.jkutils.utils.ContextUtils;
 import com.pakistan.jkutils.utils.FieldUtils;
+import com.pakistan.jkutils.utils.MoverUtils;
+import com.thesoftparrot.storageapp.visapp.R;
 import com.thesoftparrot.storageapp.visapp.databinding.FragmentVerifyCodeBinding;
+import com.thesoftparrot.storageapp.visapp.extras.callback.ProgressStatusCallback;
 import com.thesoftparrot.storageapp.visapp.extras.utils.KeyUtils;
+import com.thesoftparrot.storageapp.visapp.repository.model.Profile;
 import com.thesoftparrot.storageapp.visapp.ui.base.fragment.PhoneAuthFragment;
+import com.thesoftparrot.storageapp.visapp.ui.home.activity.MainActivity;
+import com.thesoftparrot.storageapp.visapp.viewmodel.ProfileViewModel;
+import com.thesoftparrot.storageapp.visapp.viewmodel.factory.ProfileViewModelFactory;
 
-
-public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBinding> {
+public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBinding> implements ProgressStatusCallback {
 
     private static final String TAG = "VerifyCodeFragment";
+
+    private ProfileViewModel mProfileViewModel;
 
     public VerifyCodeFragment() {
         // Required empty public constructor
@@ -35,6 +46,7 @@ public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBind
 
     @Override
     protected void initRef() {
+        initNavGraph(R.id.host_fragment);
 
         if(getArguments() == null){
             ContextUtils.toast(requireContext(),"No Phone Number received... Try again");
@@ -50,8 +62,8 @@ public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBind
             return;
         }
 
+        mProfileViewModel = new ViewModelProvider(this, new ProfileViewModelFactory(this, null)).get(ProfileViewModel.class);
         mBinding.phoneNumberTv.setText(phoneNumber);
-        loading(true,false, KeyUtils.PHONE_VERIFICATION_MSG);
         sendVerificationCode(phoneNumber);
     }
 
@@ -64,7 +76,7 @@ public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBind
         mBinding.verifyBtn.setOnClickListener(view -> {
             if(!FieldUtils.isFieldEmpty(mBinding.codeEt)){
                 String code = mBinding.codeEt.getText().toString().trim();
-                loading(true,false, KeyUtils.PHONE_VERIFICATION_MSG);
+                loading(true,false, KeyUtils.AUTH_LOADING_MSG);
                 verifyCode(code);
             }
         });
@@ -73,21 +85,36 @@ public class VerifyCodeFragment extends PhoneAuthFragment<FragmentVerifyCodeBind
 
     @Override
     protected void onPhoneAuthSuccess(boolean isNewUser) {
-        loading(false,false, null);
-/*        if(isNewUser){
+        if(isNewUser){
             String userId = findUid();
             String phoneNumber = findPhoneNumber();
             Profile profile = new Profile(userId, phoneNumber);
-            ProfileViewModel profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-            profileViewModel.updateInfo(profile);
-            mNavController.navigate(R.id.action_verifyCodeFragment_to_verificationSuccessFragment);
-        }*/
+            mProfileViewModel.updateProfileInfo(profile, true);
+        }else {
+            MoverUtils.moveTo(requireContext(), MainActivity.class);
+            requireActivity().finish();
+        }
     }
 
     @Override
     protected void onPhoneAuthFailed(String error) {
+        Log.e(TAG, "_onPhoneAuthFailed: "+error);
         loading(false,false, null);
         snacky(mBinding.getRoot(), error);
     }
 
+    @Override
+    public void onProgressStateSuccess(String msg) {
+        loading(false,false, null);
+        mNavController.navigate(R.id.action_verifyCodeFragment_to_verificationSuccessFragment);
+    }
+
+    @Override
+    public void onProgressStateFailure(String error) {
+        loading(false,false, null);
+
+        snacky(mBinding.backIv, error);
+        MoverUtils.moveTo(requireContext(), MainActivity.class);
+        requireActivity().finish();
+    }
 }

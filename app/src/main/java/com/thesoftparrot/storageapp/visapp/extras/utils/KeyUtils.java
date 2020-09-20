@@ -14,7 +14,10 @@ public class KeyUtils {
 
     // Messages
     public static final String UPDATE_SUCCESS_MSG = "Updated Successfully!";
+    public static final String FETCH_SUCCESS_MSG = "Fetched Successfully!";
+    public static final String PROFILE_UPDATE_LOADING_MSG = "Updating profile... please wait";
     public static final String PHONE_VERIFICATION_MSG = "Please wait... while your phone number is being verified";
+    public static final String AUTH_LOADING_MSG = "Authenticating... please wait";
 
     // Collections
     public static final String COLLECTION_PROFILE = "Profile";

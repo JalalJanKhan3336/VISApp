@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:text="@string/goto_home"
         android:layout_marginTop="@dimen/_16sdp"
-        style="@style/Small_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        style="@style/Smallest_Text_Normal_Style"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

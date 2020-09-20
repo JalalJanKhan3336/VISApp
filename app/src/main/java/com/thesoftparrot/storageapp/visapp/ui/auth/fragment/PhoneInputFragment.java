@@ -34,6 +34,7 @@ public class PhoneInputFragment extends BaseFragment<FragmentPhoneInputBinding> 
 
     @Override
     protected void initRef() {
+        initNavGraph(R.id.host_fragment);
         mBinding.phoneInc.ccp.registerCarrierNumberEditText(mBinding.phoneInc.phoneInputEt);
     }
 

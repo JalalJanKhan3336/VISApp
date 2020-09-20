@@ -2,7 +2,6 @@ package com.thesoftparrot.storageapp.visapp.ui.base.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,6 @@ public abstract class BaseFragment<VB> extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initNavGraph();
         initPref();
         findUid();
         initRef();
@@ -98,8 +96,8 @@ public abstract class BaseFragment<VB> extends Fragment {
             mProgressDialog.dismiss();
     }
 
-    private void initNavGraph(){
-        mNavController = Navigation.findNavController(requireActivity(), R.id.host_fragment);
+    protected void initNavGraph(int host){
+        mNavController = Navigation.findNavController(requireActivity(), host);
     }
 
     protected void snacky(View view, String msg) {
