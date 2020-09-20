@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="8"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:id="@+id/all_tv"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/Smallest_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        android:text="@string/all"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/item_selected_bg"/>
+
+    <TextView
+        android:id="@+id/fav_tv"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        style="@style/Smallest_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        android:text="@string/fav"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/item_selected_bg"/>
+
+    <TextView
+        android:id="@+id/archive_tv"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        style="@style/Smallest_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        android:text="@string/archive"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/item_selected_bg"/>
+
+    <TextView
+        android:id="@+id/trash_tv"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        style="@style/Smallest_Text_Normal_Style"
+        android:textColor="@android:color/white"
+        android:text="@string/trash"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/item_selected_bg"/>
+
+</LinearLayout>

@@ -22,4 +22,12 @@
     <string name="goto_home">Go to Home</string>
     <string name="loading_msg">Loading information… please wait</string>
     <string name="phone_auth">Phone Authentication</string>
+    <string name="photos">Photos</string>
+    <string name="videos">Videos</string>
+    <string name="settings">Settings</string>
+    <string name="clear_space">Clear Space</string>
+    <string name="all">All</string>
+    <string name="archive">Archive</string>
+    <string name="fav">Favorites</string>
+    <string name="trash">Trash</string>
 </resources>

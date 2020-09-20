@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/photosFragment"
+        android:title="@string/photos"
+        android:icon="@drawable/ic_photos"/>
+
+    <item android:id="@+id/videosFragment"
+        android:title="@string/videos"
+        android:icon="@drawable/ic_videos"/>
+
+    <item android:id="@+id/freeUpSpaceFragment"
+        android:title="@string/clear_space"
+        android:icon="@drawable/ic_cleaner"/>
+
+    <item android:id="@+id/settingsFragment"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+
+</menu>

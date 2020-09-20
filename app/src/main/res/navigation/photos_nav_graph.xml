@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/photos_nav_graph"
+    app:startDestination="@id/allPhotosFragment">
+
+    <fragment
+        android:id="@+id/allPhotosFragment"
+        android:name="com.thesoftparrot.storageapp.visapp.ui.home.fragment.AllPhotosFragment"
+        android:label="fragment_all_photos"
+        tools:layout="@layout/fragment_all_photos" />
+    <fragment
+        android:id="@+id/favoritePhotosFragment"
+        android:name="com.thesoftparrot.storageapp.visapp.ui.home.fragment.FavoritePhotosFragment"
+        android:label="fragment_favorite_photos"
+        tools:layout="@layout/fragment_favorite_photos" />
+    <fragment
+        android:id="@+id/archivePhotosFragment"
+        android:name="com.thesoftparrot.storageapp.visapp.ui.home.fragment.ArchivePhotosFragment"
+        android:label="fragment_archive_photos"
+        tools:layout="@layout/fragment_archive_photos" />
+    <fragment
+        android:id="@+id/trashPhotosFragment"
+        android:name="com.thesoftparrot.storageapp.visapp.ui.home.fragment.TrashPhotosFragment"
+        android:label="fragment_trash_photos"
+        tools:layout="@layout/fragment_trash_photos" />
+</navigation>
